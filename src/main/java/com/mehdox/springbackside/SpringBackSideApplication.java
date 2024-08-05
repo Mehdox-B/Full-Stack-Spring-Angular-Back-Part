@@ -28,11 +28,11 @@ public class SpringBackSideApplication {
 			PaymentType[] paymentTypes = PaymentType.values();
 			Random random = new Random();
 			//Students Manual Creation
-			studentRepository.save(Student.builder().ID(UUID.randomUUID().toString())
+			studentRepository.save(Student.builder().Id(UUID.randomUUID().toString())
 					.firstName("Mehdox").lastName("B.").code("1234").email("mehdiben.tech@gmail.com").build());
-			studentRepository.save(Student.builder().ID(UUID.randomUUID().toString())
+			studentRepository.save(Student.builder().Id(UUID.randomUUID().toString())
 					.firstName("Mehdox00").lastName("B.").code("5678").email("mehdiben.tech@gmail.com").build());
-			studentRepository.save(Student.builder().ID(UUID.randomUUID().toString())
+			studentRepository.save(Student.builder().Id(UUID.randomUUID().toString())
 					.firstName("Mehdox11").lastName("B.").code("0987").email("mehdiben.tech@gmail.com").build());
 			//Student's Payments Manual Creation
 			studentRepository.findAll().forEach(st -> {

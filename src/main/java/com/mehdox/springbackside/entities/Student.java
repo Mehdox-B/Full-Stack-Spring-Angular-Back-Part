@@ -12,7 +12,7 @@ import lombok.*;
 @Builder
 public class Student {
     @Id
-    private String ID;
+    private String Id;
     @Column(unique = true)
     private String code;
     private String  firstName;

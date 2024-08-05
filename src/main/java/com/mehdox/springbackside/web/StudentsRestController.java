@@ -1,5 +1,6 @@
 package com.mehdox.springbackside.web;
 
+import com.mehdox.springbackside.dto.NewPaymentDTO;
 import com.mehdox.springbackside.entities.Payment;
 import com.mehdox.springbackside.entities.PaymentStatus;
 import com.mehdox.springbackside.entities.PaymentType;
@@ -53,8 +54,8 @@ public class StudentsRestController {
         return paymentsRepository.findByStudentsCode(student_code);
     }
     @PostMapping(value = "/payments",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Payment savePayment(@RequestParam MultipartFile file,@RequestParam double amount,@RequestParam String student_code,@RequestParam PaymentType paymentType){
-        Payment savedPayment = paymentService.savePayment(file,amount,student_code,paymentType);
+    public Payment savePayment(@RequestParam("file") MultipartFile file, NewPaymentDTO newPaymentDTO){
+        Payment savedPayment = paymentService.savePayment(file,newPaymentDTO);
         return savedPayment;
     }
     @GetMapping(value = "/paymentFile/{payment_ID}",produces = MediaType.APPLICATION_PDF_VALUE)

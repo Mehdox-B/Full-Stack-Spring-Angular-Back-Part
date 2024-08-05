@@ -1,5 +1,6 @@
 package com.mehdox.springbackside.service;
 
+import com.mehdox.springbackside.dto.NewPaymentDTO;
 import com.mehdox.springbackside.entities.Payment;
 import com.mehdox.springbackside.entities.PaymentStatus;
 import com.mehdox.springbackside.entities.PaymentType;
@@ -27,7 +28,7 @@ public class PaymentService {
         this.paymentsRepository = paymentsRepository;
         this.studentRepository = studentRepository;
     }
-    public Payment savePayment(MultipartFile file ,double amount, String student_code,PaymentType paymentType){
+    public Payment savePayment(MultipartFile file , NewPaymentDTO newPaymentDTO){
         Path path = Paths.get(System.getProperty("user.home"),"students-app-files","payments");
         if(!Files.exists(path)){
             try {
@@ -44,14 +45,14 @@ public class PaymentService {
         catch(IOException exception){
             exception.printStackTrace();
         }
-        Student student = studentRepository.findByCode(student_code);
+        Student student = studentRepository.findByCode(newPaymentDTO.getStudentCode());
         Payment payment = Payment.builder()
                 .paymentStatus(PaymentStatus.CREATED)
                 .date(LocalDate.now())
-                .Amount(amount)
+                .Amount(newPaymentDTO.getAmount())
                 .file(filePath.toUri().toString())
                 .students(student)
-                .paymentType(paymentType)
+                .paymentType(newPaymentDTO.getPaymentType())
                 .build();
         Payment savedPayment = paymentsRepository.save(payment);
         return  savedPayment;
